@@ -1,11 +1,12 @@
 # Home SOC Lab — Wazuh SIEM
 
-Ambiente de laboratório pessoal para estudo prático de monitoramento de segurança (SOC), 
+Ambiente de laboratório pessoal para estudo prático de monitoramento de segurança (SOC),
 usando Wazuh como SIEM para detecção de eventos em tempo real.
 
 ## Objetivo
 
 Simular um ambiente básico de SOC para praticar:
+
 - Coleta e correlação de logs
 - Detecção de tentativas de acesso não autorizado (SSH brute-force)
 - Análise de alertas de segurança
@@ -34,17 +35,20 @@ Simular um ambiente básico de SOC para praticar:
 ## Evidências
 
 ### Agente conectado e ativo
-![Agent Status](screenshots/01-dashboard-agents.png)
+
+![Agent Status](screenshots/03-dashboard-agents-active.png)
 
 ### Alerta de tentativa de SSH brute-force detectado
-![SSH Alert](screenshots/02-alert-ssh-bruteforce.png)
+
+![SSH Alert](screenshots/05-alert-ssh-detected.png)
 
 ## Desafios técnicos enfrentados e resolvidos
 
 Durante a montagem do ambiente, enfrentei e resolvi problemas reais de infraestrutura:
-- Instabilidade de CPU (soft lockup) no Wazuh Indexer, resolvida ajustando a interface 
+
+- Instabilidade de CPU (soft lockup) no Wazuh Indexer, resolvida ajustando a interface
   de paravirtualização do VirtualBox
-- Incompatibilidade de versão entre agente e servidor (agente instalado via repositório 
+- Incompatibilidade de versão entre agente e servidor (agente instalado via repositório
   trouxe versão mais recente que o manager), resolvida fixando a versão exata do pacote
 - Configuração de rede interna (Host-only) entre as VMs via netplan
 - Ajuste de `vm.max_map_count` exigido pelo OpenSearch/Indexer

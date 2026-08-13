@@ -8,11 +8,11 @@ Simulação do download de um arquivo de teste a partir de uma máquina atacante
 
 ## Ambiente
 
-| Máquina      | Função                                          |
-| ------------ | ----------------------------------------------- |
-| **Wazuh**    | SIEM — processamento e visualização dos eventos |
-| **Victim**   | Endpoint Linux monitorado pelo agente Wazuh     |
-| **Attacker** | Origem do arquivo — servidor HTTP local         |
+| Máquina | Função |
+|---|---|
+| **Wazuh** | SIEM — processamento e visualização dos eventos |
+| **Victim** | Endpoint Linux monitorado pelo agente Wazuh |
+| **Attacker** | Origem do arquivo — servidor HTTP local |
 
 Rede privada dedicada, seguindo a estrutura utilizada no LAB-01.
 
@@ -57,19 +57,34 @@ Laboratório concluído com sucesso: o FIM detectou a criação do arquivo em te
 
 ## Evidências
 
-Armazenadas em [`evidences/`](./evidences):
+> Imagens armazenadas em [`evidences/`](./evidences)
 
-| #   | Arquivo                                 | Descrição                                    |
-| --- | --------------------------------------- | -------------------------------------------- |
-| 01  | `01-baseline-dashboard.png`             | Baseline do Wazuh Dashboard                  |
-| 02  | `02-expanded_baseline-dashboard.png`    | Baseline do Dashboard (expandido)            |
-| 03  | `03-baseline-process I network.png`     | Baseline de processos e rede                 |
-| 04  | `04-etapa-entrega.png`                  | Etapa de entrega do arquivo pelo atacante    |
-| 05  | `05-final_result_3vms.png`              | Visão do ambiente com as três VMs            |
-| 06  | `06-expanded_wazuh-alert-dashboard.png` | Alerta do Wazuh (expandido)                  |
-| 07  | `07-wazuh_alert_dashboard.png`          | Alerta do Wazuh no Dashboard                 |
-| 08  | `08-wazuh_FIM_detection_dashboard.png`  | Detecção do FIM no Dashboard                 |
-| 09  | `09-kali_linux_malware_test_file.png`   | Arquivo de teste (EICAR) na máquina atacante |
+**01 — Baseline do Wazuh Dashboard**
+![Baseline do Dashboard](./evidences/01-baseline-dashboard.png)
+
+**02 — Baseline do Dashboard (expandido)**
+![Baseline do Dashboard expandido](./evidences/02-expanded_baseline-dashboard.png)
+
+**03 — Baseline de processos e rede**
+![Baseline de processos e rede](./evidences/03-baseline-process%20I%20network.png)
+
+**04 — Etapa de entrega do arquivo pelo atacante**
+![Etapa de entrega](./evidences/04-etapa-entrega.png)
+
+**05 — Visão do ambiente com as três VMs**
+![Ambiente com três VMs](./evidences/05-final_result_3vms.png)
+
+**06 — Alerta do Wazuh (expandido)**
+![Alerta do Wazuh expandido](./evidences/06-expanded_wazuh-alert-dashboard.png)
+
+**07 — Alerta do Wazuh no Dashboard**
+![Alerta do Wazuh no Dashboard](./evidences/07-wazuh_alert_dashboard.png)
+
+**08 — Detecção do FIM no Dashboard**
+![Detecção do FIM](./evidences/08-wazuh_FIM_detection_dashboard.png)
+
+**09 — Arquivo de teste (EICAR) na máquina atacante**
+![Arquivo de teste EICAR](./evidences/09-kali_linux_malware_test_file.png)
 
 > Evidências revisadas previamente para garantir que não contenham credenciais ou outras informações sensíveis.
 

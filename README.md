@@ -94,12 +94,12 @@ SOC_LAB/
     │
     ├── 01-authentication-bruteforce/
     │   ├── README.md
-    │   ├── evidence/
+    │   ├── evidences/
     │   └── troubleshooting.md
     │
     └── 02-file-integrity-threat-intelligence/
         ├── README.md
-        ├── incident-report.md
+        ├── troubleshooting.md
         └── evidences/
 ```
 

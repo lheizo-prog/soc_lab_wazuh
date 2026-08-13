@@ -14,19 +14,19 @@ O principal objetivo é transformar conhecimentos teóricos de Cybersecurity em 
 
 O projeto busca desenvolver conhecimentos práticos em:
 
-* Monitoramento de endpoints;
-* Análise de logs;
-* SIEM;
-* Detecção de atividades suspeitas;
-* Investigação de alertas;
-* File Integrity Monitoring (FIM);
-* Threat Intelligence;
-* Análise de autenticação;
-* Reconhecimento de rede;
-* Brute force em ambiente controlado;
-* Correlação de eventos;
-* Resposta a incidentes;
-* Fundamentos de DFIR.
+- Monitoramento de endpoints;
+- Análise de logs;
+- SIEM;
+- Detecção de atividades suspeitas;
+- Investigação de alertas;
+- File Integrity Monitoring (FIM);
+- Threat Intelligence;
+- Análise de autenticação;
+- Reconhecimento de rede;
+- Brute force em ambiente controlado;
+- Correlação de eventos;
+- Resposta a incidentes;
+- Fundamentos de DFIR.
 
 Além do resultado dos experimentos, o projeto também documenta dificuldades encontradas durante a configuração do ambiente, decisões tomadas e aprendizados obtidos durante cada laboratório.
 
@@ -52,30 +52,30 @@ A infraestrutura pode ser modificada conforme novos cenários forem adicionados.
 
 ### Monitoramento e análise
 
-* Wazuh
-* Wazuh Dashboard
-* SIEM
-* Logs de sistema
-* Event monitoring
-* File Integrity Monitoring (Syscheck)
+- Wazuh
+- Wazuh Dashboard
+- SIEM
+- Logs de sistema
+- Event monitoring
+- File Integrity Monitoring (Syscheck)
 
 ### Threat Intelligence
 
-* VirusTotal
+- VirusTotal
 
 ### Segurança e simulação
 
-* Kali Linux
-* Nmap
-* Hydra
-* Python HTTP Server
+- Kali Linux
+- Nmap
+- Hydra
+- Python HTTP Server
 
 ### Sistema operacional e infraestrutura
 
-* Linux
-* Windows
-* Máquinas virtuais
-* Rede privada de laboratório
+- Linux
+- Windows
+- Máquinas virtuais
+- Rede privada de laboratório
 
 Novas ferramentas poderão ser incorporadas conforme a complexidade dos cenários aumentar.
 
@@ -95,11 +95,13 @@ SOC_LAB/
     ├── 01-authentication-bruteforce/
     │   ├── README.md
     │   ├── evidences/
-    │   └── troubleshooting.md
+    │   ├── troubleshooting.md
+    │   └── incident-report.md
     │
     └── 02-file-integrity-threat-intelligence/
         ├── README.md
         ├── troubleshooting.md
+        ├── incident-report.md
         └── evidences/
 ```
 
@@ -109,10 +111,10 @@ A estrutura será expandida conforme novos laboratórios forem desenvolvidos.
 
 ## Laboratórios
 
-| Laboratório | Tema                                                | Status     |
-| ----------- | ---------------------------------------------------- | ---------- |
-| LAB-01      | Authentication, Reconnaissance & Brute Force         | Concluído  |
-| LAB-02      | File Integrity Monitoring & Threat Intelligence      | Concluído  |
+| Laboratório | Tema                                            | Status    |
+| ----------- | ----------------------------------------------- | --------- |
+| LAB-01      | Authentication, Reconnaissance & Brute Force    | Concluído |
+| LAB-02      | File Integrity Monitoring & Threat Intelligence | Concluído |
 
 Os laboratórios serão adicionados progressivamente, sempre buscando introduzir uma nova capacidade de monitoramento ou investigação.
 
@@ -136,12 +138,12 @@ O primeiro laboratório concentrou-se em atividades relacionadas a autenticaçã
 
 Foram realizados:
 
-* Tentativas manuais de autenticação com credenciais incorretas;
-* Reconhecimento da máquina vítima utilizando Nmap;
-* Criação de uma wordlist reduzida para o ambiente de teste;
-* Tentativas controladas de brute force utilizando Hydra;
-* Observação do sucesso da autenticação;
-* Análise dos eventos e alertas gerados pelo Wazuh.
+- Tentativas manuais de autenticação com credenciais incorretas;
+- Reconhecimento da máquina vítima utilizando Nmap;
+- Criação de uma wordlist reduzida para o ambiente de teste;
+- Tentativas controladas de brute force utilizando Hydra;
+- Observação do sucesso da autenticação;
+- Análise dos eventos e alertas gerados pelo Wazuh.
 
 O laboratório permitiu estudar a relação entre uma atividade realizada pelo atacante, os eventos gerados no endpoint e a detecção realizada pelo SIEM.
 
@@ -153,12 +155,12 @@ O segundo laboratório amplia o escopo do projeto para **telemetria de arquivos 
 
 O cenário simulou o download de um arquivo de teste (EICAR) a partir de uma máquina atacante para uma máquina vítima monitorada pelo Wazuh, observando:
 
-* configuração do Syscheck/FIM para monitoramento em tempo real;
-* detecção da criação do arquivo no endpoint;
-* diferença entre detecção de integridade e classificação de ameaça;
-* integração do Wazuh com o VirusTotal;
-* consulta automática do hash do arquivo;
-* geração de um alerta enriquecido a partir do resultado da integração.
+- configuração do Syscheck/FIM para monitoramento em tempo real;
+- detecção da criação do arquivo no endpoint;
+- diferença entre detecção de integridade e classificação de ameaça;
+- integração do Wazuh com o VirusTotal;
+- consulta automática do hash do arquivo;
+- geração de um alerta enriquecido a partir do resultado da integração.
 
 O laboratório também documentou o processo de troubleshooting da integração (posicionamento incorreto do bloco `<integration>` no `ossec.conf`, validação de credenciais e reprodução do evento de FIM).
 
@@ -172,12 +174,12 @@ As atividades ofensivas têm finalidade exclusivamente educacional e são realiz
 
 O projeto busca priorizar:
 
-* aprendizado prático;
-* documentação;
-* reprodutibilidade;
-* análise baseada em evidências;
-* troubleshooting;
-* progressão gradual de dificuldade.
+- aprendizado prático;
+- documentação;
+- reprodutibilidade;
+- análise baseada em evidências;
+- troubleshooting;
+- progressão gradual de dificuldade.
 
 ---
 
@@ -197,15 +199,15 @@ A evolução do SOC_LAB será baseada na introdução gradual de novas categoria
 
 Entre os temas planejados estão:
 
-* Process execution;
-* PowerShell e command execution;
-* User and privilege changes;
-* Persistence;
-* Suspicious network activity;
-* Event correlation;
-* Incident investigation;
-* Incident response;
-* Digital forensics.
+- Process execution;
+- PowerShell e command execution;
+- User and privilege changes;
+- Persistence;
+- Suspicious network activity;
+- Event correlation;
+- Incident investigation;
+- Incident response;
+- Digital forensics.
 
 A prioridade será aumentar a capacidade de **investigar e correlacionar evidências**, e não simplesmente adicionar novas ferramentas.
 

@@ -192,24 +192,37 @@ Também foi possível compreender melhor o papel de um SIEM no processo de monit
 
 ## Evidências
 
-As evidências relacionadas ao laboratório estão armazenadas no diretório `evidence/`.
+> Imagens armazenadas em [`evidences/`](./evidences)
 
-Entre os registros podem ser incluídos:
+**01 — VMs: Wazuh e Vítima Rodando normalmente**
+![VMs-running](./evidences/01-virtualbox-vms-running.png)
 
-- screenshots do Wazuh;
-- resultados do reconhecimento;
-- eventos de autenticação;
-- alertas relacionados ao brute force;
-- demais evidências relevantes para a análise.
+**02 — Wazuh Dashboard Login**
+![Wazuh Dashboar Login](./evidences/02-wazuh-dashboard-login.png)
 
-As evidências publicadas devem ser previamente revisadas para garantir que não contenham credenciais ou outras informações sensíveis.
+**03 — Dashboard dos Agentes Ativos**
+![Dashboard Active Agents](./evidences/03-dashboard-agents-active.png)
+
+**04 — SSH Tentativa de Bruteforce Manul/Erros seguidos de autenticação**
+![Teste manual de Bruteforce no SSH/Erros consectivos na autenticação](./evidences/04-ssh-bruteforce-attempt.png)
+
+**05 — Alerta do SSH**
+![Alerta emitido pelas múltiplas tentativas falhas de autenticação](./evidences/05-alert-ssh-detected.png)
+
+**06 — Alerta expandido do Wazuh quanto ao ataque manual**
+![Alerta do Wazuh expandido](./evidences/06-alert-detail-expanded.png)
+
+**07 — Ataque de Bruteforce com Hydra**
+![Ataque de Bruteforce de teste com ferramenta Pentest](./evidences/09-hydra-bruteforce-attack.png)
+
+**08 — Alerta do Wazuh do Bruteforce do Hydra**
+![Alerta do Wazuh no Dashboard](./evidences/07-alert-hydra-ssh-bruteforce.png)
+
+**09 — Alerta expandido do Wazuh quanto ao ataque Bruteforce com Hydra**
+![Alerta do Wazuh expandido com ataque controlado com ferramenta Pentest](./evidences/08-alert-hydra-bruteforce-expanded.png)
+
+> Evidências revisadas previamente para garantir que não contenham credenciais ou outras informações sensíveis.
 
 ---
 
-## Conclusão
-
-O LAB-01 estabeleceu a base prática do SOC_LAB para monitoramento e investigação de atividades relacionadas a autenticação.
-
-A experiência permitiu observar todo o processo, desde a atividade executada pela máquina atacante até a geração e análise dos eventos no Wazuh.
-
-Os próximos laboratórios irão ampliar esse conhecimento para outras categorias de telemetria, especialmente atividades executadas diretamente no endpoint, permitindo evoluir de uma análise centrada em autenticação para uma investigação mais ampla do comportamento de sistemas monitorados.
+📄 O relatório detalhado do incidente (troubleshooting, análise passo a passo) está em [`incident-report.md`](./incident-report.md).

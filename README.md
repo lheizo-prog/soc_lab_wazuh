@@ -19,7 +19,8 @@ O projeto busca desenvolver conhecimentos práticos em:
 * SIEM;
 * Detecção de atividades suspeitas;
 * Investigação de alertas;
-* Análise de processos;
+* File Integrity Monitoring (FIM);
+* Threat Intelligence;
 * Análise de autenticação;
 * Reconhecimento de rede;
 * Brute force em ambiente controlado;
@@ -52,15 +53,22 @@ A infraestrutura pode ser modificada conforme novos cenários forem adicionados.
 ### Monitoramento e análise
 
 * Wazuh
+* Wazuh Dashboard
 * SIEM
 * Logs de sistema
 * Event monitoring
+* File Integrity Monitoring (Syscheck)
+
+### Threat Intelligence
+
+* VirusTotal
 
 ### Segurança e simulação
 
 * Kali Linux
 * Nmap
 * Hydra
+* Python HTTP Server
 
 ### Sistema operacional e infraestrutura
 
@@ -89,10 +97,10 @@ SOC_LAB/
     │   ├── evidence/
     │   └── troubleshooting.md
     │
-    └── 02-suspicious-process-execution/
+    └── 02-file-integrity-threat-intelligence/
         ├── README.md
-        ├── investigation.md
-        └── evidence/
+        ├── incident-report.md
+        └── evidences/
 ```
 
 A estrutura será expandida conforme novos laboratórios forem desenvolvidos.
@@ -101,10 +109,10 @@ A estrutura será expandida conforme novos laboratórios forem desenvolvidos.
 
 ## Laboratórios
 
-| Laboratório | Tema                                                  | Status             |
-| ----------- | ----------------------------------------------------- | ------------------ |
-| LAB-01      | Authentication, Reconnaissance & Brute Force          | Concluído          |
-| LAB-02      | Suspicious Process Execution & Endpoint Investigation | Em desenvolvimento |
+| Laboratório | Tema                                                | Status     |
+| ----------- | ---------------------------------------------------- | ---------- |
+| LAB-01      | Authentication, Reconnaissance & Brute Force         | Concluído  |
+| LAB-02      | File Integrity Monitoring & Threat Intelligence      | Concluído  |
 
 Os laboratórios serão adicionados progressivamente, sempre buscando introduzir uma nova capacidade de monitoramento ou investigação.
 
@@ -139,21 +147,20 @@ O laboratório permitiu estudar a relação entre uma atividade realizada pelo a
 
 ---
 
-## LAB-02 — Suspicious Process Execution & Endpoint Investigation
+## LAB-02 — File Integrity Monitoring & Threat Intelligence
 
-O segundo laboratório amplia o escopo do projeto para **telemetria de processos e investigação de atividades executadas no endpoint**.
+O segundo laboratório amplia o escopo do projeto para **telemetria de arquivos e enriquecimento de eventos por meio de Threat Intelligence**.
 
-O objetivo é observar como processos e comandos aparecem nos eventos coletados pelo Wazuh e desenvolver a capacidade de investigar:
+O cenário simulou o download de um arquivo de teste (EICAR) a partir de uma máquina atacante para uma máquina vítima monitorada pelo Wazuh, observando:
 
-* usuário responsável pela execução;
-* processo executado;
-* processo pai;
-* comando ou argumentos;
-* horário da atividade;
-* eventos relacionados;
-* classificação da atividade.
+* configuração do Syscheck/FIM para monitoramento em tempo real;
+* detecção da criação do arquivo no endpoint;
+* diferença entre detecção de integridade e classificação de ameaça;
+* integração do Wazuh com o VirusTotal;
+* consulta automática do hash do arquivo;
+* geração de um alerta enriquecido a partir do resultado da integração.
 
-O laboratório está sendo desenvolvido progressivamente, começando pela validação da coleta de eventos e pela criação de um baseline antes da execução dos cenários controlados.
+O laboratório também documentou o processo de troubleshooting da integração (posicionamento incorreto do bloco `<integration>` no `ossec.conf`, validação de credenciais e reprodução do evento de FIM).
 
 ---
 
@@ -192,7 +199,6 @@ Entre os temas planejados estão:
 
 * Process execution;
 * PowerShell e command execution;
-* File activity;
 * User and privilege changes;
 * Persistence;
 * Suspicious network activity;

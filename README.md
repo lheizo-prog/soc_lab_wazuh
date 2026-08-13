@@ -1,125 +1,220 @@
-# Home SOC Lab — Wazuh SIEM
+# SOC_LAB
 
-Ambiente de laboratório pessoal para estudo prático de monitoramento de segurança (SOC),
-usando Wazuh como SIEM para detecção de eventos em tempo real, com simulação de ataques
-reais usando ferramentas de pentest (Nmap, Hydra).
+## Sobre o projeto
 
-## Objetivo
+O **SOC_LAB** é um laboratório prático desenvolvido para estudar conceitos de **Security Operations Center (SOC)**, monitoramento de endpoints, detecção de atividades suspeitas e investigação de incidentes em um ambiente controlado.
 
-Simular um ambiente básico de SOC para praticar:
+O projeto utiliza máquinas virtuais para representar diferentes componentes de uma infraestrutura monitorada, permitindo simular atividades ofensivas e observar como essas ações são registradas, detectadas e analisadas.
 
-- Coleta e correlação de logs
-- Detecção de tentativas de acesso não autorizado (SSH brute-force)
-- Análise de alertas de segurança
-- Execução de ataques controlados e análise da capacidade de detecção do SIEM
+O principal objetivo é transformar conhecimentos teóricos de Cybersecurity em experiências práticas e documentadas.
 
-## Arquitetura
+---
 
-- **VM 1 — Wazuh Server** (Ubuntu Server 22.04 LTS): Indexer + Manager + Dashboard
-- **VM 2 — Vítima/Endpoint** (Ubuntu Server): Wazuh Agent monitorando eventos locais
-- **VM 3 — Atacante** (Kali Linux): geração de ataques controlados (Nmap, Hydra)
-- Rede interna isolada (VirtualBox Host-only, `192.168.56.0/24`)
-  - Wazuh Server: `192.168.56.10`
-  - Vítima/Endpoint: `192.168.56.20`
-  - Atacante (Kali): `192.168.56.30`
+## Objetivos
 
-## Ferramentas utilizadas
+O projeto busca desenvolver conhecimentos práticos em:
 
-- VirtualBox
-- Wazuh 4.9.2 (Indexer, Server, Dashboard, Agent)
-- Ubuntu Server 22.04 LTS
-- Kali Linux
-- Nmap
-- Hydra (THC-Hydra)
+* Monitoramento de endpoints;
+* Análise de logs;
+* SIEM;
+* Detecção de atividades suspeitas;
+* Investigação de alertas;
+* Análise de processos;
+* Análise de autenticação;
+* Reconhecimento de rede;
+* Brute force em ambiente controlado;
+* Correlação de eventos;
+* Resposta a incidentes;
+* Fundamentos de DFIR.
 
-## O que foi feito
+Além do resultado dos experimentos, o projeto também documenta dificuldades encontradas durante a configuração do ambiente, decisões tomadas e aprendizados obtidos durante cada laboratório.
 
-1. Provisionamento de três VMs em rede isolada (Host-only)
-2. Instalação e configuração do Wazuh Server (Indexer + Manager + Dashboard)
-3. Instalação do Wazuh Agent no endpoint monitorado
-4. Registro e conexão do agente ao servidor
-5. Simulação manual de tentativas de login SSH falhadas
-6. Verificação da detecção do evento no Dashboard do Wazuh
-7. Reconhecimento de rede com Nmap contra o endpoint vítima, a partir do Kali
-8. Simulação de ataque de força bruta SSH usando Hydra (ferramenta real de pentest),
-   com wordlist customizada, resultando em comprometimento bem-sucedido da conta de teste
-9. Verificação da detecção completa do ataque no Dashboard: sequência de tentativas
-   falhadas seguida do login bem-sucedido
+---
 
-## Evidências
+## Ambiente
 
-### Ambiente rodando
+O laboratório é composto por três máquinas virtuais conectadas em uma rede privada criada especificamente para os experimentos.
 
-![VMs em execução](screenshots/01-virtualbox-vms-running.png)
+| Máquina  | Endereço IP     | Função                            |
+| -------- | --------------- | --------------------------------- |
+| Wazuh    | `192.168.56.10` | Monitoramento e SIEM              |
+| Victim   | `192.168.56.20` | Endpoint monitorado               |
+| Attacker | `192.168.56.30` | Simulação de atividades ofensivas |
 
-### Dashboard do Wazuh — login
+Os endereços utilizados pertencem ao ambiente isolado do laboratório.
 
-![Dashboard Login](screenshots/02-wazuh-dashboard-login.png)
+A infraestrutura pode ser modificada conforme novos cenários forem adicionados.
 
-### Agente conectado e ativo
+---
 
-![Agent Status](screenshots/03-dashboard-agents-active.png)
+## Tecnologias e ferramentas
 
-### Tentativa manual de SSH sendo gerada
+### Monitoramento e análise
 
-![SSH manual attempt](screenshots/04-ssh-bruteforce-attempt.png)
+* Wazuh
+* SIEM
+* Logs de sistema
+* Event monitoring
 
-### Alerta detectado no Dashboard (teste manual)
+### Segurança e simulação
 
-![Alert Detected](screenshots/05-alert-ssh-detected.png)
+* Kali Linux
+* Nmap
+* Hydra
 
-### Detalhe do alerta (teste manual)
+### Sistema operacional e infraestrutura
 
-![Alert Detail](screenshots/06-alert-detail-expanded.png)
+* Linux
+* Windows
+* Máquinas virtuais
+* Rede privada de laboratório
 
-### Ataque de força bruta automatizado com Hydra
+Novas ferramentas poderão ser incorporadas conforme a complexidade dos cenários aumentar.
 
-![Hydra attack](screenshots/09-hydra-bruteforce-attack.png)
+---
 
-### Alerta do ataque Hydra detectado no Dashboard
+## Organização do projeto
 
-![Hydra Alert Detected](screenshots/07-alert-hydra-ssh-bruteforce.png)
+Cada laboratório possui uma finalidade específica e é documentado separadamente.
 
-### Detalhe do alerta do ataque Hydra
+```text
+SOC_LAB/
+│
+├── README.md
+│
+└── labs/
+    │
+    ├── 01-authentication-bruteforce/
+    │   ├── README.md
+    │   ├── evidence/
+    │   └── troubleshooting.md
+    │
+    └── 02-suspicious-process-execution/
+        ├── README.md
+        ├── investigation.md
+        └── evidence/
+```
 
-![Hydra Alert Detail](screenshots/08-alert-hydra-bruteforce-expanded.png)
+A estrutura será expandida conforme novos laboratórios forem desenvolvidos.
 
-## Insight técnico — limitação identificada
+---
 
-Durante testes de reconhecimento com Nmap, foi identificado que o Wazuh **não detecta
-scans de portas por padrão**, pois monitora logs de sistema (autenticação, integridade
-de arquivos, processos), não tráfego de rede bruto. A detecção de scans exigiria a
-integração de um IDS de rede, como o **Suricata**, alimentando o Wazuh com uma fonte
-de dados adicional.
+## Laboratórios
 
-Esse é um próximo passo natural de evolução do ambiente (ver "Próximos passos" abaixo).
+| Laboratório | Tema                                                  | Status             |
+| ----------- | ----------------------------------------------------- | ------------------ |
+| LAB-01      | Authentication, Reconnaissance & Brute Force          | Concluído          |
+| LAB-02      | Suspicious Process Execution & Endpoint Investigation | Em desenvolvimento |
 
-## Desafios técnicos enfrentados e resolvidos
+Os laboratórios serão adicionados progressivamente, sempre buscando introduzir uma nova capacidade de monitoramento ou investigação.
 
-Durante a montagem do ambiente, enfrentei e resolvi problemas reais de infraestrutura:
+---
 
-- **Instabilidade de CPU (soft lockup)** no Wazuh Indexer durante a instalação,
-  resolvida ajustando a interface de paravirtualização do VirtualBox (de Hyper-V
-  para Default) e o plano de energia do host
-- **Incompatibilidade de versão do sistema operacional**: Wazuh 4.9.2 não é
-  compatível oficialmente com Ubuntu 24.04, exigindo reinstalação da VM com
-  Ubuntu 22.04 LTS
-- **Espaço em disco insuficiente**, causando falha na instalação do Wazuh Dashboard;
-  resolvido limpando cache do `apt` e liberando espaço
-- **Portas ocupadas (1515, 55000)** por processos remanescentes de tentativas de
-  instalação anteriores, resolvido identificando e finalizando os processos manualmente
-- **Incompatibilidade de versão entre agente e servidor**: o agente instalado via
-  repositório trouxe uma versão mais recente (4.14.7) que o manager (4.9.2), resolvido
-  fixando a versão exata do pacote na instalação
-- **Configuração de rede interna (Host-only)** entre as três VMs via netplan (Ubuntu)
-  e nmcli (Kali), incluindo identificação de perfis de conexão de rede incorretos
-- Ajuste de `vm.max_map_count` exigido pelo OpenSearch/Indexer
+## Metodologia
 
-## Próximos passos
+Os experimentos seguem um processo prático de investigação:
 
-- [ ] Criar regra de detecção customizada para padrão de brute-force (múltiplas
-      falhas seguidas de sucesso, mesmo usuário, curto intervalo de tempo)
-- [ ] Integrar Suricata (IDS de rede) para detectar varreduras de porta (Nmap)
-- [ ] Testar módulo de File Integrity Monitoring (FIM) do Wazuh
-- [ ] Documentar relatório de incidente estruturado (ver `docs/incident-report.md`)
-- [ ] Testar cenário de exfiltração simulada via SCP
+**Preparação → Atividade controlada → Geração de eventos → Detecção → Investigação → Conclusão → Documentação**
+
+A intenção não é apenas verificar se uma ferramenta gera um alerta. O objetivo é compreender o evento e determinar, a partir das evidências disponíveis, **o que aconteceu, quando aconteceu, qual sistema foi afetado e quais elementos permitem sustentar a conclusão**.
+
+Quando uma atividade não gera o resultado esperado, o processo de troubleshooting também é documentado.
+
+---
+
+## LAB-01 — Authentication, Reconnaissance & Brute Force
+
+O primeiro laboratório concentrou-se em atividades relacionadas a autenticação e reconhecimento.
+
+Foram realizados:
+
+* Tentativas manuais de autenticação com credenciais incorretas;
+* Reconhecimento da máquina vítima utilizando Nmap;
+* Criação de uma wordlist reduzida para o ambiente de teste;
+* Tentativas controladas de brute force utilizando Hydra;
+* Observação do sucesso da autenticação;
+* Análise dos eventos e alertas gerados pelo Wazuh.
+
+O laboratório permitiu estudar a relação entre uma atividade realizada pelo atacante, os eventos gerados no endpoint e a detecção realizada pelo SIEM.
+
+---
+
+## LAB-02 — Suspicious Process Execution & Endpoint Investigation
+
+O segundo laboratório amplia o escopo do projeto para **telemetria de processos e investigação de atividades executadas no endpoint**.
+
+O objetivo é observar como processos e comandos aparecem nos eventos coletados pelo Wazuh e desenvolver a capacidade de investigar:
+
+* usuário responsável pela execução;
+* processo executado;
+* processo pai;
+* comando ou argumentos;
+* horário da atividade;
+* eventos relacionados;
+* classificação da atividade.
+
+O laboratório está sendo desenvolvido progressivamente, começando pela validação da coleta de eventos e pela criação de um baseline antes da execução dos cenários controlados.
+
+---
+
+## Princípios do laboratório
+
+Os cenários são executados em ambiente próprio e controlado.
+
+As atividades ofensivas têm finalidade exclusivamente educacional e são realizadas contra máquinas pertencentes ao laboratório.
+
+O projeto busca priorizar:
+
+* aprendizado prático;
+* documentação;
+* reprodutibilidade;
+* análise baseada em evidências;
+* troubleshooting;
+* progressão gradual de dificuldade.
+
+---
+
+## Segurança e privacidade
+
+Os endereços IP utilizados no projeto pertencem à rede privada criada especificamente para o laboratório.
+
+Informações sensíveis, credenciais, tokens, chaves privadas e outros segredos não devem ser armazenados no repositório.
+
+Screenshots, logs e evidências publicadas devem ser revisados antes do envio ao GitHub para evitar exposição de informações não relacionadas ao ambiente de testes.
+
+---
+
+## Evolução planejada
+
+A evolução do SOC_LAB será baseada na introdução gradual de novas categorias de eventos e investigação.
+
+Entre os temas planejados estão:
+
+* Process execution;
+* PowerShell e command execution;
+* File activity;
+* User and privilege changes;
+* Persistence;
+* Suspicious network activity;
+* Event correlation;
+* Incident investigation;
+* Incident response;
+* Digital forensics.
+
+A prioridade será aumentar a capacidade de **investigar e correlacionar evidências**, e não simplesmente adicionar novas ferramentas.
+
+---
+
+## Objetivo de aprendizado
+
+Este projeto faz parte de uma formação prática em Cybersecurity, com foco especial em **SOC, Security Monitoring, Incident Investigation e, futuramente, DFIR**.
+
+A proposta é construir uma sequência de experiências em que cada laboratório represente uma competência nova, permitindo acompanhar a evolução técnica por meio de resultados concretos, evidências e documentação.
+
+---
+
+## Status
+
+**Em desenvolvimento.**
+
+Novos laboratórios serão adicionados conforme o ambiente evoluir e novos conceitos forem estudados.

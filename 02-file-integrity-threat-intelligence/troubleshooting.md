@@ -292,4 +292,4 @@ A infraestrutura principal está funcionando de ponta a ponta: comunicação ent
 
 O cenário de download do arquivo de teste (EICAR) foi concluído com sucesso, com o Wazuh detectando a criação do arquivo via FIM, consultando o hash no VirusTotal e gerando o alerta correspondente.
 
-O ponto que houve modificações, mas atualmente está concluído, é a recriação e execução bem-sucedida do `system_check.sh`. Depois de uma reavaliação, foi decidido criar um novo arquivo com um padrão de mercado de um Malware de teste para o cenário. Neste Lab, esse novo arquivo possui o nome de EICAR.tx e as documentações já estão atualizadas com esse novo nome, mas ainda há menções dessa antiga versão do Malware.
+O ponto que houve modificações, mas atualmente está concluído, é a recriação e execução bem-sucedida do `system_check.sh`. Depois de uma reavaliação, foi decidido criar um novo arquivo com um padrão de mercado de um Malware de teste para o cenário. Neste Lab, esse novo arquivo possui o nome de EICAR.txt e as documentações já estão atualizadas com esse novo nome, mas ainda há menções dessa antiga versão do Malware.
